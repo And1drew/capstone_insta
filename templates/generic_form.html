@@ -1,17 +1,18 @@
 {% block content %}
 
-<form action="" method="post">
-  {% csrf_token %} {% if request.path == "/login/" %}
-  <button type="submit">Login</button>
-  <p></p>
-  <h4>No Account</h4>
-  <a href="/signup/">Sign up!</a>
-  {% elif request.path == "/signup/" %}
-  <button type="submit" class="btn btn-success">Sign Up</button>
-  {% else %} Characters left:
-  <div id="charNum">140</div>
-  <br />
-  <button type="submit" class="btn btn-success">Tweet</button>
+<form action='' method='post'>
+  {% csrf_token %}
+  {% if request.path == '/login/' %}
+      <button type='submit'>Login</button>
+      <p></p>
+      <h4>No Account</h4>
+      <a href='/signup/'>Sign up!</a>
+    {% elif request.path == '/signup/' %}
+      <button type='submit'>Sign Up</button>
+    {% else %} Characters left:
+      <div id='charNum'>280</div>
+      <br />
+      <button type='submit'>Tweet</button>
   {% endif %}
 </form>
 

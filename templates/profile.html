@@ -3,7 +3,7 @@
 <br />
 <br />
     <h3>Following: {{user.following.count}}</h3>
-    <h3>Tweets: {{tweets.count}}</h3>
+    <h3>Posts: {{ posts.count}}</h3>
 {% else %}
 
     <a href='/'><button>Home</button></a>
@@ -19,11 +19,11 @@
     <h3>Following: {{ profile.following.count }}</h3>
     <h3>Posts: {{ posts.count }}</h3>
 {% endif %}
-    <h1>{{profile.username}}'s Profile</h1>
+    <h1>{{ profile.username }}'s Profile</h1>
     <h2>Posts</h2>
 {% for post in posts %}
     <ul>
-        <h3>@{{ post.twitter_user }}<br />{{ post.post }}</h3>
+        <h3>@{{ posts.insta_user }}<br />{{ post.post }}</h3>
     </ul>
 {% endfor %}
 <br />
