@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from instauser import views as insta_user_view
 
 urlpatterns = [
+    path('', insta_user_view.IndexView.as_view(), name='home' ),
+    path('profile/<int:user_id>/', insta_user_view.ProfileView.as_view()),
+    path('post/<int:post_id>/', insta_user_view.PostView.as_view(), name='post'),
     path('admin/', admin.site.urls),
 ]
