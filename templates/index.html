@@ -1,0 +1,17 @@
+{% include 'partials/bootstrap.partial' %}
+<h1>{{ Welcome }}</h1>
+<a href="/profile/{{user.id}}/"><button>Profile</button></a>
+<a href="/addpost/"><button>Post</button></a>
+<a href="/notification/{{user.id}}/"><button>Notifications {{count}}</button></a>
+<br />
+<br />
+{% for tweet in tweets %}
+    <ul>
+    <a href="/profile/{{post.insta_user.id}}/">@{{tweet.twitter_user}}</a> 
+    <a href="/post/{{post.id}}/">{{post.time_date}}</a>
+<br />
+    {{tweet.tweet}}
+    </ul>
+{% endfor %}
+<p></p>
+<a href="/logout/"><button>Logout</button></a>
