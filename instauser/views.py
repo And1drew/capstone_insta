@@ -2,7 +2,6 @@ from django.shortcuts import render, HttpResponseRedirect, reverse
 from instauser import forms, models
 from post import models
 from django.contrib.auth import login
-from notification.models import  Notification
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
@@ -10,20 +9,18 @@ from django.views.generic import TemplateView
 class IndexView(LoginRequiredMixin, TemplateView):
 
     def get(self, request):
-        tweets = models.Post.objects.filter(twitter_user=request.user)
+        posts = models.Post.objects.filter(insta_user=request.user)
         following_posts = models.Post.objects.filter(insta_user__in=request.user.following.all())
         user_following_posts = posts | following_posts
         user_following_posts = user_following_posts.order_by('-time_date')
-        count = len(
-            [notified for notified in Notification.objects.filter(receiver__id=request.user.id) if not notified.viewed_at]
-            )
-        return render(request, 'index.html', {'Welcome': 'Welcome to my Twitter Clone', 'tweets': user_following_tweets, 'count': count})
+
+        return render(request, 'index.html', {'Welcome': 'Welcome to our Instagram Clone', 'posts': user_following_posts, 'count': count})
 
 class ProfileView(TemplateView):
 
     def get(self, request, user_id):
         profile = models.InstaUser.objects.get(id=user_id)
-        posts = models.Postt.objects.filter(twitter_user=profile)
+        posts = models.Post.objects.filter(insta_user=profile)
         user_following = profile.following.all()
         following_list = list(user_following)
         return render(request, 'profile.html', {'profile': profile, 'posts': posts, 'user_following': following_list})
